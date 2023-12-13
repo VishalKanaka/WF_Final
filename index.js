@@ -94,12 +94,15 @@ const verifyToken = (req, res, next) => {
   console.log(req.cookies);
 
   if (!token) {
-    return res.status(401).json({ error: 'Unauthorized - Missing JWT token' });
+   
+    return res.status(401).json({ error: 'Unauthorized - Plese Login' });
   }
 
   jwt.verify(token, jwtSecretKey, (err, decoded) => {
     if (err) {
-      return res.status(401).json({ error: 'Unauthorized - Invalid JWT token' });
+      res.redirect("/");
+      return res.status(401).json({ error: 'Unauthorized - Plese Login' });
+     
     }
 
     req.user = decoded;
@@ -129,6 +132,7 @@ app.post('/', async (req, res) => {
 
     res.render('index');
   } else {
+    res.render('login');
     res.status(401).send('Authentication failed');
   }
 });
@@ -148,6 +152,9 @@ app.get('/api/allmovies', verifyToken, (req, res) => {
       moviesData: movies
     });
   })
+  .catch(error => {
+    handleErrors(res, 500, 'Internal Server Error');
+  });
   
 });
 app.get('/api/allmoviesimdb', verifyToken, (req, res) => {
@@ -157,7 +164,9 @@ app.get('/api/allmoviesimdb', verifyToken, (req, res) => {
       moviesData: movies
     });
   })
-  
+  .catch(error => {
+    handleErrors(res, 500, 'Internal Server Error');
+  });
 });
 app.get('/api/allmoviesyear', verifyToken, (req, res) => {
   Movie.find({ 'year': { $ne: null, $ne: '' } }).limit(500).sort({ 'year': -1 }).then((movies) => {
@@ -166,6 +175,9 @@ app.get('/api/allmoviesyear', verifyToken, (req, res) => {
       moviesData: movies
     });
   })
+  .catch(error => {
+    handleErrors(res, 500, 'Internal Server Error');
+  });
   
 });
 
