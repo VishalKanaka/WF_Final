@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Invoice Form</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: white;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+    }
+
+    .form-container {
+        max-width: 1000px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin: auto;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    table.form {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table.form td {
+        padding: 4px;
+       font-size: 17px;
+    }
+
+    table.form tr td label {
+        display: block;
+        margin-bottom: 4px;
+        color: #555;
+        font-size: 17px;
+    }
+
+    table.form tr td input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    table.form tr td button[type="submit"] {
+        background-color: #0c0c0c;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        width: 50%;
+        font-size: 20px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+
+
+
+
+    <script>
+        function calculateTotal() {
+            const unitPrice = parseFloat(document.getElementById('unitPrice').value);
+            const tax = parseFloat(document.getElementById('tax').value);
+            const quantity = parseFloat(document.getElementById('quantity').value);
+
+            if (!isNaN(unitPrice) && !isNaN(tax) && !isNaN(quantity)) {
+                const subtotal = unitPrice * quantity;
+                const totalTax = subtotal * (tax / 100);
+                const total = subtotal + totalTax;
+                document.getElementById('total').value = total.toFixed(2);
+            } else {
+                document.getElementById('total').value = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="/api/movies/insert" method="POST" >
+        <h1>Add Movie</h1>
+        <div class="form-container">
+    <table class="form">
+        <tr>
+            <td><label for="title">Title:</label></td>
+            <td><input type="text" id="plot" name="plot"></td>
+        
+            <td><label for="genres">Genres:</label></td>
+            <td><input type="text" id="genres" name="genres"></td>
+        
+       
+            <td><label for="runtime">Runtime (minutes):</label></td>
+            <td><input type="number" id="runtime" name="runtime"></td>
+        </tr>
+         <tr>
+            <td><label for="cast">Cast:</label></td>
+            <td><input type="text" id="cast" name="cast"></td>
+        
+            <td><label for="poster">Poster URL:</label></td>
+            <td><input type="text" id="poster" name="poster"></td>
+        
+            <td><label for="fullplot">Full Plot:</label></td>
+            <td><input type="text" id="fullplot" name="fullplot"></td>
+        </tr>
+        <tr>
+            <td><label for="languages">Languages :</label></td>
+            <td><input type="text" id="languages" name="languages"></td>
+        
+            <td><label for="released">Released Date:</label></td>
+            <td><input type="date" id="released" name="released"></td>
+        
+            <td><label for="directors">Directors :</label></td>
+            <td><input type="text" id="directors" name="directors"></td>
+        </tr>
+        <tr>
+            <td><label for="rated">Rated:</label></td>
+            <td><input type="text" id="rated" name="rated"></td>
+        
+            <td><label for="awards">Awards:</label></td>
+            <td><input type="text" id="awards" name="awards"></td>
+        
+            <td><label for="year">Year:</label></td>
+            <td><input type="number" id="year" name="year"></td>
+       </tr>
+       <tr>
+            <td><label for="countries">Countries:</label></td>
+            <td><input type="text" id="countries" name="countries"></td>
+       
+            <td><label for="type">Type:</label></td>
+            <td><input type="text" id="type" name="type"></td>
+        
+            <td><label for="tomatoes">Tomatoes:</label></td>
+            <td><input type="text" id="tomatoes" name="tomatoes"></td>
+        </tr>
+       
+        <tr>
+            <td colspan="2"><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+    </div>
+
+
+    </form>
+</body>
+</html>

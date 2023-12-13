@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="shortcut icon" href="source/logo.png" type="image/x-icon">
+  <link rel="icon" href="source/logo.png" type="image/x-icon">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    
+
+    .wrapper {
+      
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+     justify-content: space-around;
+      align-items: flex-start;
+    }
+
+    .card {
+      width: 300px;
+      height: 400px;
+      border-radius: 4px;
+      padding: 1.5rem;
+    
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      -webkit-transition: 0.4s ease-out;
+      transition: 0.4s ease-out;
+      box-shadow: 2px 4px 12px rgba(244, 242, 242, 0.5);
+       margin: 1.8%;
+    }
+
+    .card:hover {
+     
+  -webkit-transform: translateY(20px); 
+  transform: translateY(20px);
+  height: 400px; 
+  width: 400px;
+  z-index: 0.5;
+
+    }
+
+    .card:hover:before {
+      opacity: 1;
+    }
+
+    .card:hover .info {
+      opacity: 1;
+      -webkit-transform: translateY(0px);
+      transform: translateY(0px);
+    }
+
+    .card:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      opacity: 0;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 15px;
+    }
+
+    .card .info {
+      position: relative;
+      z-index: 3;
+      color: white;
+      opacity: 0;
+      -webkit-transform: translateY(30px);
+      transform: translateY(30px);
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+    }
+
+    .card .info h1 {
+      margin: 0px;
+    }
+
+    .card .info p {
+      letter-spacing: 1px;
+      font-size: 10px;
+      margin-top: 2px;
+    }
+  #sort{
+    color:rgb(15, 15, 13);
+    
+  }
+  #star{
+    color: yellow;
+  }
+ 
+
+ 
+  
+  </style>
+  <title>Search Results</title>
+</head>
+
+<body>
+ 
+  
+  
+  
+  <div class="wrapper">
+
+    {{#each moviesData}}
+    
+    <div class="card">
+      <img src="{{poster}}" alt="{{title}} Poster" class="movie-poster">
+      <div class="info">
+       
+        <h2>Title:{{title}} ({{year}})</h2>
+        <p><strong><i id="star" class="fa fa-star" aria-hidden="true"></i></strong> {{imdb.rating}}/10 ({{imdb.votes}} votes)</p>
+
+        <p>{{plot}}</p>
+        <p><strong>Genres:</strong>
+          {{#each genres}}
+          {{this}}{{#unless @last}}, {{/unless}}
+          {{/each}}
+        </p>
+        <p><strong>Runtime:</strong> {{runtime}} minutes</p>
+        <p><strong>Rated:</strong> {{rated}}</p>
+       
+        <p><strong>Languages:</strong>
+          {{#each languages}}
+          {{this}}{{#unless @last}}, {{/unless}}
+          {{/each}}
+        </p>
+        <p><strong>Release Date:</strong> {{released}}</p>
+        <p><strong>Directors:</strong>
+          {{#each directors}}
+          {{this}}{{#unless @last}}, {{/unless}}
+          {{/each}}
+        </p>
+        
+
+        <h3>Cast:</h3>
+        <p>
+          {{#each cast}}
+          {{this}}{{#unless @last}},{{/unless}}
+          {{/each}}
+        </p>
+
+        
+
+       
+      </div>
+    </div>
+  
+    {{/each}}
+  </div>
+</body>
+
+</html>
+
+
+</body>
+
+</html>
